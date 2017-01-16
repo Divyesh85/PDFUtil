@@ -46,7 +46,7 @@ public class PDFCompare {
 			
 		pdfVisualCompare(arg[0],arg[1],arg[2],arg[3]);
 		try {
-			AddImageToWord();
+			AddImageToWord(arg[2]);
 		} catch (InvalidFormatException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -118,19 +118,20 @@ public class PDFCompare {
 		}
 	}
 
-	public static void AddImageToWord() throws InvalidFormatException, FileNotFoundException, IOException
+	public static void AddImageToWord(String imgPath) throws InvalidFormatException, FileNotFoundException, IOException
 	{
 		 XWPFDocument doc = new XWPFDocument();
 	        XWPFParagraph p = doc.createParagraph();
 	        XWPFRun xwpfRun = p.createRun();
 	        
-	        File folder = new File("c:/Users/dtandel/Desktop/PowerGateTesting/imgpath/");
+	        //File folder = new File("c:/Users/dtandel/Desktop/PowerGateTesting/imgpath/");
+	        File folder = new File(imgPath);
 	        File[] listOfFiles = folder.listFiles();
 
 	            for (int i = 0; i < listOfFiles.length; i++) {
 	              if (listOfFiles[i].isFile()) {
 	                System.out.println("File " + listOfFiles[i].getName());
-	                String imgFile = "c:/Users/dtandel/Desktop/PowerGateTesting/imgpath/" +listOfFiles[i].getName();
+	                String imgFile = imgPath +listOfFiles[i].getName();
 	                int format=XWPFDocument.PICTURE_TYPE_PNG;
 		            xwpfRun.setText(listOfFiles[i].getName());
 		            xwpfRun.addBreak();
@@ -142,7 +143,7 @@ public class PDFCompare {
 	              }
 	            }
 	            	       
-	        FileOutputStream out = new FileOutputStream("c:/Users/dtandel/Desktop/PowerGateTesting/imgpath/PdfDiffConsolidated.docx");
+	        FileOutputStream out = new FileOutputStream(imgPath + "PdfDiffConsolidated.docx");
 	        doc.write(out);
 	        out.close();
 	        
