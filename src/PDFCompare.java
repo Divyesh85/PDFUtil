@@ -44,7 +44,7 @@ public class PDFCompare {
 			}
 		}*/
 			
-		pdfVisualCompare(arg[0],arg[1],arg[2]);
+		pdfVisualCompare(arg[0],arg[1],arg[2],arg[3]);
 		try {
 			AddImageToWord();
 		} catch (InvalidFormatException e) {
@@ -90,7 +90,7 @@ public class PDFCompare {
 		}
 	}
 	
-	public static void pdfVisualCompare(String file1, String file2, String imgPath)
+	public static void pdfVisualCompare(String file1, String file2, String imgPath, String pages)
 	{
 		PDFUtil pdfUtil = new PDFUtil();
 		
@@ -104,9 +104,10 @@ public class PDFCompare {
 		//if you need to store the result
 		pdfUtil.highlightPdfDifference(true);
 		pdfUtil.setImageDestinationPath(imgPath);
+		int pageNumbers = Integer.parseInt(pages);
 		//pdfUtil.setImageDestinationPath("c:/Users/dtandel/Desktop/PowerGateTesting/imgpath/");
 		
-		for(int i=1;i<=58;i++)
+		for(int i=1;i<=pageNumbers;i++)
 		{
 			try {
 				pdfUtil.compare(file1, file2, i);				
